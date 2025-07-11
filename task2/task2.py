@@ -1,7 +1,6 @@
 #############
 # Задание 2 #
 ############# 
-import sys
 import math
 
 def circle(circ_fle = [1.0, 2.0, 4.0], point_fle = [3.5, 4.0]):
@@ -17,17 +16,16 @@ def circle(circ_fle = [1.0, 2.0, 4.0], point_fle = [3.5, 4.0]):
             
             dist = math.sqrt((point_x - center_x)**2 + (point_y - center_y)**2)
             if dist < rad:
-              return "1"
+              return "1" #точка внутри
             elif dist > rad:
-              return "2"
+              return "2" #точка снаружи.
             else:
-              return "0" #на
+              return "0" #точка лежит на окружности
 
 if __name__ == "__main__":
-
-        #circle_file = sys.argv[1]
-        #point_file = sys.argv[2]
-         
-        #result = circle(circ_fle, point_fle)
-        result = circle()
-        print(result)
+  
+  circ_fle = input("Вводите файл с координатами и радиусом окружности")
+  point_fle  = input("Вводите файл с координатами точек")
+  #result = circle(circ_fle, point_fle)
+  result = circle()
+  print(result)
