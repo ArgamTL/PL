@@ -1,5 +1,19 @@
 import json
 
+
+
+def fill_values(node, value_map, values_data, tests_data):
+    if 'id' in node:
+        node_id = node['id']
+        if node_id in value_map:
+            node['value'] = value_map[node_id]
+    
+    if 'values' in node:
+        for child in node['values']:
+            fill_values(child, value_map,values_data, tests_data)
+# data for fast testing 
+
+
 '''
 val_file = input("Enter the path to the values.json")
 test_file  = input("Enter the path to the tests.json")
@@ -11,17 +25,6 @@ with open(test_file, 'r') as f2:
      tests_data = json.load(f2)
 '''
 
-
-def fill_values(node, value_map):
-    if 'id' in node:
-        node_id = node['id']
-        if node_id in value_map:
-            node['value'] = value_map[node_id]
-    
-    if 'values' in node:
-        for child in node['values']:
-            fill_values(child, value_map)
-# data for fast testing 
 
 values_data = {
   "values": [{"id": 2, "value": "passed"}, {"id": 41, "value": "passed"}, 
@@ -48,13 +51,13 @@ tests_data = {
              "values": [{"id": 5321, "title": "Confidentiality", "value": ""}, 
                         {"id": 5322, "title": "Integrity", "value": ""}]}]
 }
-
 value_map = {item['id']: item['value'] for item in values_data['values']}
 
 report_data = json.loads(json.dumps(tests_data))
 
-for test in report_data['tests']:
-    fill_values(test, value_map)
+for node in report_data['tests']:
+    fill_values(node, value_map, values_data, tests_data)
+
 
 with open('report.json', 'w') as f:
     json.dump(report_data, f, indent=2)
