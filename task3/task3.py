@@ -1,11 +1,17 @@
-#############
-# Задание 3 #
-############# 
-
 import json
 
+'''
+val_file = input("Enter the path to the values.json")
+test_file  = input("Enter the path to the tests.json")
+ 
+with open(val_file, 'r') as f1:
+     values_data = json.load(f1)
+
+with open(test_file, 'r') as f2:
+     tests_data = json.load(f2)
+
+
 def fill_values(node, value_map):
-    """Рекурсивно заполняет поле 'value' в узле и его дочерних элементах."""
     if 'id' in node:
         node_id = node['id']
         if node_id in value_map:
@@ -14,13 +20,9 @@ def fill_values(node, value_map):
     if 'values' in node:
         for child in node['values']:
             fill_values(child, value_map)
+'''
+# data for fast testing 
 
-
-#with open('values.json', 'r') as f1:
-#     values_data = json.load(f1)
-
-#with open('tests.json', 'r') as f2:
-#     tests_data = json.load(f2)
 values_data = {
   "values": [{"id": 2, "value": "passed"}, {"id": 41, "value": "passed"}, 
              {"id": 73, "value": "passed"}, {"id": 110, "value": "failed"}, 
@@ -47,14 +49,16 @@ tests_data = {
                         {"id": 5322, "title": "Integrity", "value": ""}]}]
 }
 
-
 value_map = {item['id']: item['value'] for item in values_data['values']}
 
+report_data = json.loads(json.dumps(tests_data))
 
-for test in tests_data['tests']:
+for test in report_data['tests']:
     fill_values(test, value_map)
 
+with open('report.json', 'w') as f:
+    json.dump(report_data, f, indent=2)
 
-#with open('report.json', 'w') as f:
-#    json.dump(report_data, f, indent=2)
-print(tests_data)
+#print for testing
+print(report_data)   
+    
