@@ -1,8 +1,8 @@
 #############
 # Задание 4 #
 #############
-import sys
-#nums = sys.argv[1]
+
+nums = input("Введите путь к файлу")
 
 #with open('nums.txt', 'r') as file:
     #nums = [line.strip() for line in file]
@@ -15,5 +15,4 @@ def minMoves(nums) -> int:
    moves = total_sum - min_value * len(nums)
    return moves
   
-print(minMoves( nums))   
-
+print(minMoves( nums))  
