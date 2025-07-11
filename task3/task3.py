@@ -9,6 +9,7 @@ with open(val_file, 'r') as f1:
 
 with open(test_file, 'r') as f2:
      tests_data = json.load(f2)
+'''
 
 
 def fill_values(node, value_map):
@@ -20,7 +21,6 @@ def fill_values(node, value_map):
     if 'values' in node:
         for child in node['values']:
             fill_values(child, value_map)
-'''
 # data for fast testing 
 
 values_data = {
